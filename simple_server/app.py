@@ -1,18 +1,14 @@
 import os
 
 from flask import Flask
-from flask import (
-    request, 
-    jsonify,
-    render_template,
-)
+from flask import render_template
 
 app = Flask('simple_server')
 
-@app.route("/")
+@app.route('/')
 @app.route('/hello')
 @app.route('/hello/<user>')
-def hello(user=None):
+def index(user=None):
     context = {
         'username': user or 'world!',
     }
