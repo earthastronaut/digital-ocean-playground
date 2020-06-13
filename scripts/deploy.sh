@@ -1,34 +1,40 @@
 #!/bin/bash
 
 # ---------------------------------------------------------------------------- #
-# SECRETS
+# Parameters
 # ---------------------------------------------------------------------------- #
 
-SECRETS_PATH='./untracked_production'
+# Directory of this script.
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# Secrets which should not be stored in git
+# {SECRETS_PATH}
 # ├── ssh_remote_host.txt   <- Single line with the ssh <remote_ssh_name>
 # └── ssh
 #     ├── config            <- SSH config for defining github.com access
 #     ├── id_rsa            <- Private github deploy key referenced in config
 #     └── id_rsa.pub        <- Public key
+SECRETS_PATH="${SCRIPT_DIR}/untracked_production"
 
-# ---------------------------------------------------------------------------- #
-# Parameters
-# ---------------------------------------------------------------------------- #
-
+# Remote user@host
 REMOTE=$(cat ${SECRETS_PATH}/ssh_remote_host.txt)
+
+# Location of the code on remote server
 REMOTE_CODE_PATH='/usr/local/src/simple_server'
 
 # ---------------------------------------------------------------------------- #
-# definitions
+# Definitions
 # ---------------------------------------------------------------------------- #
 
 function run_remote_execute {
     ssh ${REMOTE} $@
 }
+
 function run_copy_to_remote {
     echo "scp -r $1 ${REMOTE}:$2"
     scp -r $1 ${REMOTE}:$2
 }
+
 function echo_section {
     echo '---------------------'
     echo $1
