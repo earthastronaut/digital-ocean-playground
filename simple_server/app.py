@@ -16,7 +16,7 @@ app = Flask('simple_server')
 def index(user=None):
     print(request.headers)
     context = {
-        'username': user or 'world!',
+        'username': user or 'World!',
     }
     response = make_response(render_template('index.html', **context))
     response.headers.set(
