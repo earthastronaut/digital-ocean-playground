@@ -10,10 +10,7 @@ SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Secrets which should not be stored in git
 # {SECRETS_PATH}
 # ├── ssh_remote_host.txt   <- Single line with the ssh <remote_ssh_name>
-# └── ssh
-#     ├── config            <- SSH config for defining github.com access
-#     ├── id_rsa            <- Private github deploy key referenced in config
-#     └── id_rsa.pub        <- Public key
+# └── digital_ocean_github_deploy_key_rsa.priv  <- Deloyment key for github
 SECRETS_PATH="${SCRIPT_PATH}/untracked_production"
 
 # Remote user@host
