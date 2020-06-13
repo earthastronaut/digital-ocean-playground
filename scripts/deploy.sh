@@ -52,7 +52,7 @@ if [[ "$response" == "" ]]
 then
     run_remote_execute "git clone git@github.com:earthastronaut/digital-ocean-playground.git ${REMOTE_CODE_PATH}"
 else
-    run_remote_execute "git --git-dir=${REMOTE_CODE_PATH}/.git pull origin master"
+    run_remote_execute "git -C ${REMOTE_CODE_PATH} pull origin master"
 fi
 
 # -------------------------- #
