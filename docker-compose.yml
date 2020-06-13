@@ -2,10 +2,23 @@ version: '3.7'
 
 services:
 
-  web:    
-    build: .
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    tty: true
     ports:
-      - 8080:8080 # host:guest
+      - 8080:80
+      - 8443:443
+    volumes:
+      # - ./nginx/www:/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+
+  web:
+    build: .
+    # ports:
+    #   - 8080:8080 # host:guest
+    depends_on: 
+      - nginx
     volumes:
       - .:/app
     environment:
